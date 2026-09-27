@@ -38,6 +38,14 @@ export default function Navbar() {
             Projects
           </NavLink>
           <a
+            href="/Harika_Resume.pdf"
+            download
+            className="nav-link"
+            onClick={() => setMenuOpen(false)}
+          >
+            Resume
+          </a>
+          <a
             href="mailto:harikapuchalapalli@gmail.com"
             className="nav-cta"
             onClick={() => setMenuOpen(false)}

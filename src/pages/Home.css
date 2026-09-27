@@ -69,7 +69,7 @@
 
 .hero-name {
   font-family: var(--font-display);
-  font-size: clamp(3rem, 7vw, 6rem);
+  font-size: clamp(1.6rem, 8.6vw, 6rem);
   font-weight: 800;
   line-height: 1.0;
   color: var(--white);
@@ -514,6 +514,131 @@
   color: var(--accent2);
 }
 
+/* ── Experience ── */
+.timeline {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.timeline-card {
+  background: var(--bg2);
+  border: 1px solid var(--border);
+  border-left: 3px solid var(--accent);
+  border-radius: 20px;
+  padding: 32px 36px;
+  transition: all 0.3s ease;
+}
+
+.timeline-card:hover {
+  border-color: rgba(139,92,246,0.4);
+  border-left-color: var(--accent2);
+  transform: translateY(-3px);
+}
+
+.timeline-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  flex-wrap: wrap;
+  gap: 8px 24px;
+  margin-bottom: 12px;
+}
+
+.timeline-title {
+  font-family: var(--font-display);
+  font-size: 1.2rem;
+  font-weight: 700;
+  color: var(--white);
+}
+
+.timeline-org {
+  color: var(--accent2);
+  font-weight: 500;
+}
+
+.timeline-period, .edu-period, .card-period {
+  font-size: 0.82rem;
+  color: var(--muted);
+  white-space: nowrap;
+}
+
+.card-period {
+  margin-top: 14px;
+}
+
+.timeline-note {
+  font-style: italic;
+  color: var(--accent3);
+  font-size: 0.9rem;
+  margin-bottom: 12px;
+}
+
+.timeline-points {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+
+.timeline-points li {
+  display: flex;
+  gap: 10px;
+  font-size: 0.93rem;
+  color: var(--text);
+  line-height: 1.6;
+}
+
+.point-arrow {
+  color: var(--accent);
+  flex-shrink: 0;
+}
+
+.skill-tag.small {
+  font-size: 0.78rem;
+  padding: 4px 12px;
+}
+
+/* ── Education ── */
+.edu-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 6px 24px;
+  padding: 22px 36px;
+  border-bottom: 1px solid var(--border);
+  transition: background 0.2s ease;
+}
+
+.edu-row:last-child { border-bottom: none; }
+.edu-row:hover { background: rgba(139,92,246,0.04); }
+
+.edu-school {
+  font-family: var(--font-display);
+  font-weight: 700;
+  color: var(--white);
+  font-size: 1.02rem;
+}
+
+.edu-degree {
+  color: var(--muted);
+  font-size: 0.92rem;
+}
+
+.edu-score {
+  color: var(--accent);
+  font-weight: 500;
+}
+
+/* ── Awards ── */
+.awards-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+}
+
 /* ── Footer ── */
 .footer {
   position: relative;
@@ -567,7 +692,7 @@
 /* ── Responsive ── */
 @media (max-width: 900px) {
   .hero-inner {
-    grid-template-columns: 1fr;
+    grid-template-columns: minmax(0, 1fr);
   }
   .hero-avatar {
     display: none;
@@ -576,7 +701,7 @@
     grid-template-columns: 1fr;
     gap: 40px;
   }
-  .research-grid {
+  .research-grid, .awards-grid {
     grid-template-columns: 1fr 1fr;
   }
 }
@@ -584,7 +709,12 @@
 @media (max-width: 600px) {
   .section { padding: 70px 24px; }
   .hero { padding: 0 24px; }
-  .research-grid { grid-template-columns: 1fr; }
+  .research-grid, .awards-grid { grid-template-columns: 1fr; }
+  .timeline-card { padding: 24px 22px; }
+  .edu-row { padding: 18px 24px; }
+  .timeline-period, .edu-period { white-space: normal; }
+  .about-stats { min-width: 0; }
+  .hero-actions a { text-align: center; }
   .skill-group { grid-template-columns: 1fr; gap: 12px; }
   .detail-row { grid-template-columns: 1fr; gap: 4px; padding: 16px 24px; }
 }

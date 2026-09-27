@@ -128,13 +128,42 @@
   padding-top: 4px;
 }
 
+.project-meta {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  flex-wrap: wrap;
+  gap: 6px 16px;
+  margin-bottom: 12px;
+}
+
 .project-tag {
   font-size: 0.75rem;
   font-weight: 500;
   color: var(--card-accent);
   text-transform: uppercase;
   letter-spacing: 0.12em;
-  margin-bottom: 12px;
+}
+
+.project-period {
+  font-size: 0.8rem;
+  color: var(--muted);
+}
+
+.badge-progress {
+  display: inline-block;
+  vertical-align: middle;
+  margin-left: 12px;
+  font-family: var(--font-body);
+  font-size: 0.7rem;
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: #f59e0b;
+  border: 1px solid rgba(245, 158, 11, 0.5);
+  background: rgba(245, 158, 11, 0.1);
+  padding: 3px 10px;
+  border-radius: 100px;
 }
 
 .project-title {

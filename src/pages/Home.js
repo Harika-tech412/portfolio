@@ -1,13 +1,39 @@
 import React, { useEffect, useRef } from 'react';
 import { NavLink } from 'react-router-dom';
+import { contact, education, experience, skills, awards, leadership } from '../data/profile';
 import './Home.css';
 
-const skills = [
-  { category: 'Languages', items: ['Python', 'C', 'Java'] },
-  { category: 'AI / ML', items: ['Machine Learning', 'Deep Learning', 'NLP', 'GenAI', 'RAG'] },
-  { category: 'Libraries', items: ['NumPy', 'Pandas', 'Scikit-learn', 'PyTorch', 'HuggingFace'] },
-  { category: 'Web / Backend', items: ['React', 'HTML', 'CSS', 'Django', 'REST APIs'] },
-  { category: 'Tools', items: ['Docker', 'Git', 'Postman', 'Milvus (Vector DB)'] },
+const focusAreas = [
+  {
+    icon: '🤖',
+    title: 'Agentic AI',
+    desc: 'LangGraph agents that plan multi-step work, keep persistent memory, and reason over retrieved context.',
+  },
+  {
+    icon: '🔍',
+    title: 'Retrieval-Augmented Generation',
+    desc: 'End-to-end RAG: ingestion, chunking, embeddings, vector search (Milvus, pgvector), and grounded answers.',
+  },
+  {
+    icon: '🧠',
+    title: 'LLM Fine-Tuning',
+    desc: 'Supervised and multi-task instruction fine-tuning of models like Gemma-3 and DistilBERT.',
+  },
+  {
+    icon: '🛡️',
+    title: 'Explainable ML',
+    desc: 'Calibrated, interpretable models with SHAP explanations for high-stakes decisions such as fraud detection.',
+  },
+  {
+    icon: '🔁',
+    title: 'Full ML Lifecycle',
+    desc: 'Data preparation, feature engineering, training, tuning, evaluation, and retraining.',
+  },
+  {
+    icon: '🚀',
+    title: 'Full-Stack AI Systems',
+    desc: 'FastAPI backends, React/TypeScript dashboards, Docker, and Azure event-driven processing.',
+  },
 ];
 
 export default function Home() {
@@ -28,7 +54,6 @@ export default function Home() {
 
   return (
     <div className="page home-page">
-      {/* Background orbs */}
       <div className="orb orb-1"></div>
       <div className="orb orb-2"></div>
       <div className="orb orb-3"></div>
@@ -38,41 +63,35 @@ export default function Home() {
         <div className="hero-inner">
           <div className="hero-text">
             <p className="stagger hero-eyebrow">
-              <span className="dot"></span> Available for Internships
+              <span className="dot"></span> Centific Hackathon Winner · 1st of 15,000+
             </p>
             <h1 className="stagger hero-name">
               Puchalapalli<br />
               <span className="name-accent">Harika</span>
             </h1>
-            <p className="stagger hero-role">
-              AI Engineer &nbsp;·&nbsp; ML Researcher &nbsp;·&nbsp; Builder
-            </p>
+            <p className="stagger hero-role">AI Engineer</p>
             <p className="stagger hero-bio">
-              B.Tech AI student at <strong>Mahindra University</strong> (CGPA 9.20) with hands-on
-              experience building RAG systems, multilingual NLP models, and scalable AI pipelines.
-              Passionate about making intelligent systems that solve real-world problems.
+              AI Engineer experienced in the <strong>full ML lifecycle</strong> (data preparation,
+              training, tuning, retraining) and in deploying <strong>LLM/RAG agents</strong>;
+              full-stack with Python, PyTorch, FastAPI, and React/TypeScript.
             </p>
             <div className="stagger hero-actions">
               <NavLink to="/projects" className="btn-primary">View Projects</NavLink>
-              <a
-                href="mailto:harikapuchalapalli@gmail.com"
-                className="btn-ghost"
-              >
-                Get in Touch
-              </a>
+              <a href={contact.resume} download className="btn-ghost">Download Resume</a>
+              <a href={`mailto:${contact.email}`} className="btn-ghost">Get in Touch</a>
             </div>
           </div>
 
           <div className="stagger hero-avatar">
             <div className="avatar-ring">
               <div className="avatar-placeholder">
-                <img src={require('./profile.jpg')} alt="Harika" style={{width:'100%', height:'100%', objectFit:'cover', borderRadius:'50%'}} />
+                <img src={require('./profile.jpg')} alt="Puchalapalli Harika" style={{ width: '100%', height: '100%', objectFit: 'cover', borderRadius: '50%' }} />
               </div>
               <div className="ring-decoration"></div>
             </div>
             <div className="avatar-tag">
               <span className="tag-dot"></span>
-              AI Intern @ Vassar Labs
+              AI Engineering Intern @ Centific
             </div>
           </div>
         </div>
@@ -83,7 +102,7 @@ export default function Home() {
         </div>
       </section>
 
-      {/* ABOUT ME */}
+      {/* ABOUT */}
       <section className="section about-section">
         <div className="section-inner">
           <div className="section-label">
@@ -93,84 +112,105 @@ export default function Home() {
             <div className="about-text">
               <h2 className="section-title">Turning data into <em>intelligence</em></h2>
               <p>
-                I'm an Artificial Intelligence undergraduate passionate about building systems that
-                actually understand language, learn from data, and scale to real users. My journey
-                spans from fine-tuning large language models to deploying production-grade AI APIs.
+                I'm a B.Tech Artificial Intelligence student at <strong>Mahindra University</strong> who
+                builds AI systems end to end: from preparing data and training models to deploying
+                LLM and RAG agents behind production APIs and React dashboards.
               </p>
               <p>
-                During my internship at <strong>Vassar Labs</strong>, I built an end-to-end
-                RAG-based QA system — handling everything from document ingestion and vector
-                embeddings to Dockerized deployment. I love working at the intersection of
-                research and engineering.
+                At <strong>Centific</strong>, I built a LangGraph Market Research Agent with Cosmos DB
+                memory and Azure Event Hub processing, an internship I earned by winning Centific's
+                hackathon. At <strong>Vassar Labs</strong>, I shipped an end-to-end RAG QA system on
+                Milvus, containerized with Docker.
               </p>
               <p>
-                Outside of tech, I serve as Finance Member for the <strong>Sakhi Club</strong>
-                &nbsp;(Women Empowerment Club) at Mahindra University, directing budgeting and
-                coordinating awareness campaigns.
+                Outside of tech, I serve as Finance Member of the <strong>Sakhi Club</strong> (Women
+                Empowerment Club) at Mahindra University.
               </p>
             </div>
             <div className="about-stats">
               <div className="stat-card">
-                <div className="stat-num">9.20</div>
+                <div className="stat-num">9.30</div>
                 <div className="stat-label">CGPA / 10</div>
               </div>
               <div className="stat-card">
-                <div className="stat-num">3+</div>
+                <div className="stat-num">2</div>
+                <div className="stat-label">AI Internships</div>
+              </div>
+              <div className="stat-card">
+                <div className="stat-num">5</div>
                 <div className="stat-label">AI Projects</div>
               </div>
               <div className="stat-card">
-                <div className="stat-num">2</div>
-                <div className="stat-label">Months Intern</div>
-              </div>
-              <div className="stat-card">
-                <div className="stat-num">22</div>
-                <div className="stat-label">Languages (NLP)</div>
+                <div className="stat-num">#1</div>
+                <div className="stat-label">of 15,000+</div>
               </div>
             </div>
           </div>
         </div>
       </section>
 
-      {/* RESEARCH INTERESTS */}
+      {/* EXPERIENCE */}
+      <section className="section experience-section">
+        <div className="section-inner">
+          <div className="section-label">
+            <span>02</span> Experience
+          </div>
+          <h2 className="section-title">Where I've worked</h2>
+          <div className="timeline">
+            {experience.map((job) => (
+              <div className="timeline-card" key={job.company}>
+                <div className="timeline-head">
+                  <div>
+                    <h3 className="timeline-title">{job.role}</h3>
+                    <div className="timeline-org">{job.company}</div>
+                  </div>
+                  <div className="timeline-period">{job.period}</div>
+                </div>
+                {job.note && <p className="timeline-note">{job.note}</p>}
+                <ul className="timeline-points">
+                  {job.points.map((p) => (
+                    <li key={p}><span className="point-arrow">→</span>{p}</li>
+                  ))}
+                </ul>
+                <div className="skill-tags">
+                  {job.tools.map((t) => <span className="skill-tag small" key={t}>{t}</span>)}
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* EDUCATION */}
+      <section className="section education-section">
+        <div className="section-inner">
+          <div className="section-label">
+            <span>03</span> Education
+          </div>
+          <h2 className="section-title">Academic background</h2>
+          <div className="details-card">
+            {education.map((e) => (
+              <div className="edu-row" key={e.school}>
+                <div>
+                  <div className="edu-school">{e.school}</div>
+                  <div className="edu-degree">{e.degree} · <span className="edu-score">{e.score}</span></div>
+                </div>
+                <div className="edu-period">{e.period}</div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* FOCUS AREAS */}
       <section className="section research-section">
         <div className="section-inner">
           <div className="section-label">
-            <span>02</span> Research Interests
+            <span>04</span> Focus Areas
           </div>
-          <h2 className="section-title">What I explore</h2>
+          <h2 className="section-title">What I build</h2>
           <div className="research-grid">
-            {[
-              {
-                icon: '🧠',
-                title: 'Large Language Models',
-                desc: 'Fine-tuning, instruction learning, and evaluating LLMs for low-resource and multilingual tasks.',
-              },
-              {
-                icon: '🌐',
-                title: 'Multilingual NLP',
-                desc: 'Building unified models for Indian languages — transliteration, normalization, punctuation restoration.',
-              },
-              {
-                icon: '🔍',
-                title: 'Retrieval-Augmented Generation',
-                desc: 'Combining semantic retrieval with LLM generation for accurate, grounded question answering.',
-              },
-              {
-                icon: '⚙️',
-                title: 'Predictive Maintenance',
-                desc: 'ML pipelines for industrial failure prediction using ensemble methods and composite risk scoring.',
-              },
-              {
-                icon: '🚀',
-                title: 'AI Systems Engineering',
-                desc: 'Designing scalable, production-ready AI backends with REST APIs, vector databases, and Docker.',
-              },
-              {
-                icon: '📊',
-                title: 'Data-Driven Decision Making',
-                desc: 'Applying machine learning to real-world datasets for actionable, interpretable insights.',
-              },
-            ].map((item) => (
+            {focusAreas.map((item) => (
               <div className="research-card" key={item.title}>
                 <div className="research-icon">{item.icon}</div>
                 <h3>{item.title}</h3>
@@ -185,7 +225,7 @@ export default function Home() {
       <section className="section skills-section">
         <div className="section-inner">
           <div className="section-label">
-            <span>03</span> Skills
+            <span>05</span> Skills
           </div>
           <h2 className="section-title">Technical toolkit</h2>
           <div className="skills-grid">
@@ -203,70 +243,76 @@ export default function Home() {
         </div>
       </section>
 
-      {/* PERSONAL DETAILS */}
-      <section className="section details-section">
+      {/* AWARDS & LEADERSHIP */}
+      <section className="section awards-section">
         <div className="section-inner">
           <div className="section-label">
-            <span>04</span> Personal Details
+            <span>06</span> Awards & Leadership
           </div>
-          <h2 className="section-title">Get to know me</h2>
+          <h2 className="section-title">Recognition</h2>
+          <div className="awards-grid">
+            {awards.map((a) => (
+              <div className="research-card" key={a.title}>
+                <div className="research-icon">🏆</div>
+                <h3>{a.title}</h3>
+                <p>{a.detail}</p>
+                <div className="card-period">{a.period}</div>
+              </div>
+            ))}
+            {leadership.map((l) => (
+              <div className="research-card" key={l.title}>
+                <div className="research-icon">🤝</div>
+                <h3>{l.title}</h3>
+                <p>{l.org}. {l.detail}.</p>
+                <div className="card-period">{l.period}</div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* CONTACT */}
+      <section className="section details-section" id="contact">
+        <div className="section-inner">
+          <div className="section-label">
+            <span>07</span> Contact
+          </div>
+          <h2 className="section-title">Get in touch</h2>
           <div className="details-card">
             <div className="detail-row">
-              <span className="detail-label">Name</span>
-              <span className="detail-value">Puchalapalli Harika</span>
-            </div>
-            <div className="detail-row">
-              <span className="detail-label">Phone</span>
-              <span className="detail-value">+91 83744 47884</span>
-            </div>
-            <div className="detail-row">
-              <span className="detail-label">Personal Email</span>
-              <a className="detail-value detail-link" href="mailto:harikapuchalapalli@gmail.com">
-                harikapuchalapalli@gmail.com
-              </a>
+              <span className="detail-label">Email</span>
+              <a className="detail-value detail-link" href={`mailto:${contact.email}`}>{contact.email}</a>
             </div>
             <div className="detail-row">
               <span className="detail-label">LinkedIn</span>
-              <a
-                className="detail-value detail-link"
-                href="https://linkedin.com/in/harika-p-622557288"
-                target="_blank"
-                rel="noreferrer"
-              >
+              <a className="detail-value detail-link" href={contact.linkedin} target="_blank" rel="noreferrer">
                 linkedin.com/in/harika-p-622557288
               </a>
             </div>
             <div className="detail-row">
-              <span className="detail-label">University</span>
-              <span className="detail-value">Mahindra University, Hyderabad</span>
+              <span className="detail-label">GitHub</span>
+              <a className="detail-value detail-link" href={contact.github} target="_blank" rel="noreferrer">
+                github.com/Harika-tech412
+              </a>
             </div>
             <div className="detail-row">
-              <span className="detail-label">Degree</span>
-              <span className="detail-value">B.Tech in Artificial Intelligence (2023–2027)</span>
-            </div>
-            <div className="detail-row">
-              <span className="detail-label">CGPA</span>
-              <span className="detail-value">9.20 / 10</span>
-            </div>
-            <div className="detail-row">
-              <span className="detail-label">Location</span>
-              <span className="detail-value">Hyderabad, India</span>
+              <span className="detail-label">Resume</span>
+              <a className="detail-value detail-link" href={contact.resume} download>Download PDF</a>
             </div>
           </div>
         </div>
       </section>
 
-      {/* FOOTER */}
       <footer className="footer">
         <div className="footer-inner">
           <p className="footer-name">Puchalapalli Harika</p>
           <p className="footer-sub">AI Engineer · Mahindra University · 2027</p>
           <div className="footer-links">
-            <a href="mailto:harikapuchalapalli@gmail.com">Email</a>
-            <a href="https://linkedin.com/in/harika-p-622557288" target="_blank" rel="noreferrer">LinkedIn</a>
-            <a href="https://github.com/your-username" target="_blank" rel="noreferrer">GitHub</a>
+            <a href={`mailto:${contact.email}`}>Email</a>
+            <a href={contact.linkedin} target="_blank" rel="noreferrer">LinkedIn</a>
+            <a href={contact.github} target="_blank" rel="noreferrer">GitHub</a>
           </div>
-          <p className="footer-copy">© 2025 Harika Puchalapalli. Built with React.</p>
+          <p className="footer-copy">© {new Date().getFullYear()} Puchalapalli Harika. Built with React.</p>
         </div>
       </footer>
     </div>
