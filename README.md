@@ -3,9 +3,10 @@
 Personal portfolio of **Puchalapalli Harika**, AI Engineer (B.Tech in AI, Mahindra University).
 Built with **React** and **React Router**, deployed on **Vercel**.
 
-**Sections:** hero with a resume download, About, Experience (Centific, Vassar Labs), Education, Focus Areas,
-Skills, Awards & Leadership, Contact, and a Projects page (Aegis, EduAgent, Multilingual NLP for Indian
-Languages, Hybrid Predictive Maintenance, Medical Scribe Agent).
+**Home (`/`):** hero with resume download and headline metrics, Experience (Centific, Vassar Labs), Projects,
+Skills, Education & Awards, Contact.
+**Case studies (`/projects/:slug`):** one page per project (problem, architecture, engineering highlights,
+results, stack) for Aegis, EduAgent, Multilingual NLP, Hybrid Predictive Maintenance, and Medical Scribe Agent.
 
 ## Local development
 
@@ -51,13 +52,18 @@ vercel --prod
 
 ```
 src/
-├── components/   Navbar
-├── data/         profile.js (site content)
-├── pages/        Home, Projects (+ CSS, profile photo)
-├── App.js        routes
-└── index.js
+├── assets/       portrait.jpg
+├── components/   Navbar, Footer, ProjectCard, Reveal (scroll animations), Icons
+├── data/         profile.js (all site content)
+├── pages/        Home, ProjectDetail (case studies), NotFound
+├── App.js        routes + scroll handling
+└── index.css     design tokens and shared styles
 public/
-├── index.html
+├── index.html    meta + Open Graph tags
+├── og-image.png  link-preview image
+├── favicon.svg
 └── Harika_Resume.pdf
 vercel.json
 ```
+
+If the site's domain changes, update the `og:image` URL in `public/index.html` so link previews keep working.

@@ -1,320 +1,303 @@
-import React, { useEffect, useRef } from 'react';
-import { NavLink } from 'react-router-dom';
-import { contact, education, experience, skills, awards, leadership } from '../data/profile';
+import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
+import Reveal, { spotlightHandlers } from '../components/Reveal';
+import ProjectCard from '../components/ProjectCard';
+import {
+  GitHubIcon, LinkedInIcon, MailIcon, DownloadIcon, ArrowRightIcon, TrophyIcon, CapIcon, UsersIcon, CopyIcon, CheckIcon,
+} from '../components/Icons';
+import { contact, proof, experience, projects, skills, education, awards, leadership } from '../data/profile';
+import portrait from '../assets/portrait.jpg';
 import './Home.css';
 
-const focusAreas = [
-  {
-    icon: '🤖',
-    title: 'Agentic AI',
-    desc: 'LangGraph agents that plan multi-step work, keep persistent memory, and reason over retrieved context.',
-  },
-  {
-    icon: '🔍',
-    title: 'Retrieval-Augmented Generation',
-    desc: 'End-to-end RAG: ingestion, chunking, embeddings, vector search (Milvus, pgvector), and grounded answers.',
-  },
-  {
-    icon: '🧠',
-    title: 'LLM Fine-Tuning',
-    desc: 'Supervised and multi-task instruction fine-tuning of models like Gemma-3 and DistilBERT.',
-  },
-  {
-    icon: '🛡️',
-    title: 'Explainable ML',
-    desc: 'Calibrated, interpretable models with SHAP explanations for high-stakes decisions such as fraud detection.',
-  },
-  {
-    icon: '🔁',
-    title: 'Full ML Lifecycle',
-    desc: 'Data preparation, feature engineering, training, tuning, evaluation, and retraining.',
-  },
-  {
-    icon: '🚀',
-    title: 'Full-Stack AI Systems',
-    desc: 'FastAPI backends, React/TypeScript dashboards, Docker, and Azure event-driven processing.',
-  },
-];
-
-export default function Home() {
-  const heroRef = useRef(null);
-
-  useEffect(() => {
-    const elements = heroRef.current?.querySelectorAll('.stagger');
-    elements?.forEach((el, i) => {
-      el.style.opacity = '0';
-      el.style.transform = 'translateY(30px)';
-      setTimeout(() => {
-        el.style.transition = 'opacity 0.7s ease, transform 0.7s ease';
-        el.style.opacity = '1';
-        el.style.transform = 'translateY(0)';
-      }, 150 + i * 120);
-    });
-  }, []);
-
+function Hero() {
   return (
-    <div className="page home-page">
-      <div className="orb orb-1"></div>
-      <div className="orb orb-2"></div>
-      <div className="orb orb-3"></div>
+    <section className="hero page-top">
+      <div className="hero__bg" aria-hidden="true">
+        <div className="hero__grid" />
+        <div className="hero__glow hero__glow--a" />
+        <div className="hero__glow hero__glow--b" />
+      </div>
 
-      {/* HERO */}
-      <section className="hero" ref={heroRef}>
-        <div className="hero-inner">
-          <div className="hero-text">
-            <p className="stagger hero-eyebrow">
-              <span className="dot"></span> Centific Hackathon Winner · 1st of 15,000+
-            </p>
-            <h1 className="stagger hero-name">
-              Puchalapalli<br />
-              <span className="name-accent">Harika</span>
-            </h1>
-            <p className="stagger hero-role">AI Engineer</p>
-            <p className="stagger hero-bio">
-              AI Engineer experienced in the <strong>full ML lifecycle</strong> (data preparation,
-              training, tuning, retraining) and in deploying <strong>LLM/RAG agents</strong>;
-              full-stack with Python, PyTorch, FastAPI, and React/TypeScript.
-            </p>
-            <div className="stagger hero-actions">
-              <NavLink to="/projects" className="btn-primary">View Projects</NavLink>
-              <a href={contact.resume} download className="btn-ghost">Download Resume</a>
-              <a href={`mailto:${contact.email}`} className="btn-ghost">Get in Touch</a>
-            </div>
-          </div>
+      <div className="container hero__inner">
+        <div className="hero__text">
+          <Reveal>
+            <Link to="/projects/medical-scribe" className="pill">
+              <TrophyIcon />
+              <span>Centific Hackathon Winner · <strong>1st of 15,000+</strong></span>
+              <ArrowRightIcon className="pill__arrow" />
+            </Link>
+          </Reveal>
 
-          <div className="stagger hero-avatar">
-            <div className="avatar-ring">
-              <div className="avatar-placeholder">
-                <img src={require('./profile.jpg')} alt="Puchalapalli Harika" style={{ width: '100%', height: '100%', objectFit: 'cover', borderRadius: '50%' }} />
-              </div>
-              <div className="ring-decoration"></div>
+          <Reveal as="h1" className="hero__title" delay={80}>
+            Puchalapalli Harika
+            <span className="hero__role serif-accent">AI Engineer</span>
+          </Reveal>
+
+          <Reveal as="p" className="hero__summary" delay={160}>
+            AI Engineer experienced in the full ML lifecycle (data preparation, training, tuning,
+            retraining) and in deploying LLM/RAG agents; full-stack with Python, PyTorch, FastAPI,
+            and React/TypeScript.
+          </Reveal>
+
+          <Reveal className="hero__actions" delay={240}>
+            <Link to="/#projects" className="btn btn-primary">
+              View my work <ArrowRightIcon />
+            </Link>
+            <a href={contact.resume} download className="btn btn-secondary">
+              <DownloadIcon /> Download Resume
+            </a>
+            <div className="hero__socials">
+              <a className="icon-btn" href={contact.github} target="_blank" rel="noreferrer" aria-label="GitHub"><GitHubIcon /></a>
+              <a className="icon-btn" href={contact.linkedin} target="_blank" rel="noreferrer" aria-label="LinkedIn"><LinkedInIcon /></a>
+              <a className="icon-btn" href={`mailto:${contact.email}`} aria-label="Email"><MailIcon /></a>
             </div>
-            <div className="avatar-tag">
-              <span className="tag-dot"></span>
-              AI Engineering Intern @ Centific
-            </div>
-          </div>
+          </Reveal>
+
+          <Reveal as="p" className="hero__meta" delay={320}>
+            <CapIcon /> B.Tech in Artificial Intelligence, Mahindra University · Hyderabad, India
+          </Reveal>
         </div>
 
-        <div className="hero-scroll">
-          <div className="scroll-line"></div>
-          <span>scroll</span>
-        </div>
-      </section>
-
-      {/* ABOUT */}
-      <section className="section about-section">
-        <div className="section-inner">
-          <div className="section-label">
-            <span>01</span> About Me
-          </div>
-          <div className="about-grid">
-            <div className="about-text">
-              <h2 className="section-title">Turning data into <em>intelligence</em></h2>
-              <p>
-                I'm a B.Tech Artificial Intelligence student at <strong>Mahindra University</strong> who
-                builds AI systems end to end: from preparing data and training models to deploying
-                LLM and RAG agents behind production APIs and React dashboards.
-              </p>
-              <p>
-                At <strong>Centific</strong>, I built a LangGraph Market Research Agent with Cosmos DB
-                memory and Azure Event Hub processing, an internship I earned by winning Centific's
-                hackathon. At <strong>Vassar Labs</strong>, I shipped an end-to-end RAG QA system on
-                Milvus, containerized with Docker.
-              </p>
-              <p>
-                Outside of tech, I serve as Finance Member of the <strong>Sakhi Club</strong> (Women
-                Empowerment Club) at Mahindra University.
-              </p>
+        <Reveal className="hero__visual" delay={200}>
+          <div className="portrait">
+            <img src={portrait} alt="Puchalapalli Harika at Mahindra University" width="480" height="600" />
+            <div className="portrait__badge portrait__badge--top">
+              <span className="dot" /> AI Engineering Intern · Centific
             </div>
-            <div className="about-stats">
-              <div className="stat-card">
-                <div className="stat-num">9.30</div>
-                <div className="stat-label">CGPA / 10</div>
-              </div>
-              <div className="stat-card">
-                <div className="stat-num">2</div>
-                <div className="stat-label">AI Internships</div>
-              </div>
-              <div className="stat-card">
-                <div className="stat-num">5</div>
-                <div className="stat-label">AI Projects</div>
-              </div>
-              <div className="stat-card">
-                <div className="stat-num">#1</div>
-                <div className="stat-label">of 15,000+</div>
-              </div>
+            <div className="portrait__badge portrait__badge--bottom">
+              <span className="portrait__num">9.30</span>
+              <span className="portrait__lbl">CGPA / 10<br />Merit Scholar</span>
             </div>
           </div>
-        </div>
-      </section>
+        </Reveal>
+      </div>
 
-      {/* EXPERIENCE */}
-      <section className="section experience-section">
-        <div className="section-inner">
-          <div className="section-label">
-            <span>02</span> Experience
-          </div>
-          <h2 className="section-title">Where I've worked</h2>
-          <div className="timeline">
-            {experience.map((job) => (
-              <div className="timeline-card" key={job.company}>
-                <div className="timeline-head">
-                  <div>
-                    <h3 className="timeline-title">{job.role}</h3>
-                    <div className="timeline-org">{job.company}</div>
+      <div className="container">
+        <Reveal className="proof" delay={120}>
+          {proof.map((p) => (
+            <div className="proof__item" key={p.label}>
+              <div className="proof__value">{p.value}</div>
+              <div className="proof__label">{p.label}</div>
+            </div>
+          ))}
+        </Reveal>
+      </div>
+    </section>
+  );
+}
+
+function SectionHead({ eyebrow, title, lead }) {
+  return (
+    <Reveal className="section-head">
+      <div className="eyebrow">{eyebrow}</div>
+      <h2 className="h2">{title}</h2>
+      {lead && <p className="lead">{lead}</p>}
+    </Reveal>
+  );
+}
+
+function Experience() {
+  return (
+    <section className="section" id="experience">
+      <div className="container">
+        <SectionHead
+          eyebrow="Experience"
+          title={<>Shipping AI in <em>production</em></>}
+          lead="Two AI engineering internships building agents, retrieval systems, and the cloud infrastructure around them."
+        />
+        <div className="xp">
+          {experience.map((job, i) => (
+            <Reveal key={job.company} delay={i * 80}>
+              <article className="xp__item card spotlight" {...spotlightHandlers()}>
+                <div className="xp__period">{job.period}</div>
+                <div className="xp__body">
+                  <div className="xp__head">
+                    <span className="xp__logo" style={{ background: job.color }}>{job.company[0]}</span>
+                    <div>
+                      <h3 className="xp__role">{job.role}</h3>
+                      <div className="xp__company">{job.company}</div>
+                    </div>
+                    {job.badge && <span className="badge badge--gold"><TrophyIcon /> {job.badge}</span>}
                   </div>
-                  <div className="timeline-period">{job.period}</div>
+                  <ul className="bullets">
+                    {job.points.map((p) => <li key={p}>{p}</li>)}
+                  </ul>
+                  <div className="chips">
+                    {job.tools.map((t) => <span className="chip" key={t}>{t}</span>)}
+                  </div>
                 </div>
-                {job.note && <p className="timeline-note">{job.note}</p>}
-                <ul className="timeline-points">
-                  {job.points.map((p) => (
-                    <li key={p}><span className="point-arrow">→</span>{p}</li>
-                  ))}
-                </ul>
-                <div className="skill-tags">
-                  {job.tools.map((t) => <span className="skill-tag small" key={t}>{t}</span>)}
-                </div>
-              </div>
-            ))}
-          </div>
+              </article>
+            </Reveal>
+          ))}
         </div>
-      </section>
+      </div>
+    </section>
+  );
+}
 
-      {/* EDUCATION */}
-      <section className="section education-section">
-        <div className="section-inner">
-          <div className="section-label">
-            <span>03</span> Education
-          </div>
-          <h2 className="section-title">Academic background</h2>
-          <div className="details-card">
-            {education.map((e) => (
-              <div className="edu-row" key={e.school}>
+function Projects() {
+  const [featured, ...rest] = projects;
+  return (
+    <section className="section" id="projects">
+      <div className="container">
+        <SectionHead
+          eyebrow="Selected work"
+          title={<>Projects with <em>measurable</em> results</>}
+          lead="Each one goes from raw data to a working system. Open a card for the full case study: the problem, the architecture, and the decisions behind it."
+        />
+        <div className="projects">
+          <Reveal className="projects__featured">
+            <ProjectCard project={featured} featured />
+          </Reveal>
+          {rest.map((p, i) => (
+            <Reveal key={p.slug} delay={(i % 2) * 90}>
+              <ProjectCard project={p} />
+            </Reveal>
+          ))}
+        </div>
+        <Reveal className="projects__more">
+          <a href={contact.github} target="_blank" rel="noreferrer" className="btn btn-secondary">
+            <GitHubIcon /> More on GitHub
+          </a>
+        </Reveal>
+      </div>
+    </section>
+  );
+}
+
+function Skills() {
+  return (
+    <section className="section" id="skills">
+      <div className="container">
+        <SectionHead
+          eyebrow="Toolkit"
+          title={<>The <em>stack</em> I build with</>}
+          lead="From data preprocessing and model training to agents, APIs, and the dashboards people actually use."
+        />
+        <div className="skills">
+          {skills.map((g, i) => (
+            <Reveal key={g.category} className={`skills__card card spotlight skills__card--${i}`} delay={i * 60} {...spotlightHandlers()}>
+              <div className="skills__top">
+                <span className="skills__idx">0{i + 1}</span>
+                <h3>{g.category}</h3>
+              </div>
+              <div className="chips">
+                {g.items.map((s) => <span className="chip chip--lg" key={s}>{s}</span>)}
+              </div>
+            </Reveal>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+}
+
+function Background() {
+  return (
+    <section className="section" id="education">
+      <div className="container">
+        <SectionHead eyebrow="Background" title={<>Education & <em>recognition</em></>} />
+        <div className="bg-grid">
+          <Reveal className="card bg-card">
+            <h3 className="bg-card__title"><CapIcon /> Education</h3>
+            <ol className="edu">
+              {education.map((e) => (
+                <li key={e.school} className="edu__item">
+                  <div className="edu__row">
+                    <span className="edu__school">{e.school}</span>
+                    <span className="edu__score">{e.score}</span>
+                  </div>
+                  <div className="edu__row edu__row--sub">
+                    <span>{e.degree}</span>
+                    <span className="edu__period">{e.period}</span>
+                  </div>
+                </li>
+              ))}
+            </ol>
+          </Reveal>
+
+          <div className="bg-stack">
+            {awards.map((a, i) => (
+              <Reveal key={a.title} className="card bg-card award" delay={80 + i * 80}>
+                <div className="award__icon"><TrophyIcon /></div>
                 <div>
-                  <div className="edu-school">{e.school}</div>
-                  <div className="edu-degree">{e.degree} · <span className="edu-score">{e.score}</span></div>
+                  <div className="award__head">
+                    <h3>{a.title}</h3>
+                    <span className="award__period">{a.period}</span>
+                  </div>
+                  <p>{a.detail}</p>
                 </div>
-                <div className="edu-period">{e.period}</div>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* FOCUS AREAS */}
-      <section className="section research-section">
-        <div className="section-inner">
-          <div className="section-label">
-            <span>04</span> Focus Areas
-          </div>
-          <h2 className="section-title">What I build</h2>
-          <div className="research-grid">
-            {focusAreas.map((item) => (
-              <div className="research-card" key={item.title}>
-                <div className="research-icon">{item.icon}</div>
-                <h3>{item.title}</h3>
-                <p>{item.desc}</p>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* SKILLS */}
-      <section className="section skills-section">
-        <div className="section-inner">
-          <div className="section-label">
-            <span>05</span> Skills
-          </div>
-          <h2 className="section-title">Technical toolkit</h2>
-          <div className="skills-grid">
-            {skills.map((group) => (
-              <div className="skill-group" key={group.category}>
-                <div className="skill-category">{group.category}</div>
-                <div className="skill-tags">
-                  {group.items.map((item) => (
-                    <span className="skill-tag" key={item}>{item}</span>
-                  ))}
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* AWARDS & LEADERSHIP */}
-      <section className="section awards-section">
-        <div className="section-inner">
-          <div className="section-label">
-            <span>06</span> Awards & Leadership
-          </div>
-          <h2 className="section-title">Recognition</h2>
-          <div className="awards-grid">
-            {awards.map((a) => (
-              <div className="research-card" key={a.title}>
-                <div className="research-icon">🏆</div>
-                <h3>{a.title}</h3>
-                <p>{a.detail}</p>
-                <div className="card-period">{a.period}</div>
-              </div>
+              </Reveal>
             ))}
             {leadership.map((l) => (
-              <div className="research-card" key={l.title}>
-                <div className="research-icon">🤝</div>
-                <h3>{l.title}</h3>
-                <p>{l.org}. {l.detail}.</p>
-                <div className="card-period">{l.period}</div>
-              </div>
+              <Reveal key={l.title} className="card bg-card award" delay={240}>
+                <div className="award__icon award__icon--alt"><UsersIcon /></div>
+                <div>
+                  <div className="award__head">
+                    <h3>{l.title}</h3>
+                    <span className="award__period">{l.period}</span>
+                  </div>
+                  <p><span className="award__org">{l.org}.</span> {l.detail}</p>
+                </div>
+              </Reveal>
             ))}
           </div>
         </div>
-      </section>
+      </div>
+    </section>
+  );
+}
 
-      {/* CONTACT */}
-      <section className="section details-section" id="contact">
-        <div className="section-inner">
-          <div className="section-label">
-            <span>07</span> Contact
-          </div>
-          <h2 className="section-title">Get in touch</h2>
-          <div className="details-card">
-            <div className="detail-row">
-              <span className="detail-label">Email</span>
-              <a className="detail-value detail-link" href={`mailto:${contact.email}`}>{contact.email}</a>
-            </div>
-            <div className="detail-row">
-              <span className="detail-label">LinkedIn</span>
-              <a className="detail-value detail-link" href={contact.linkedin} target="_blank" rel="noreferrer">
-                linkedin.com/in/harika-p-622557288
-              </a>
-            </div>
-            <div className="detail-row">
-              <span className="detail-label">GitHub</span>
-              <a className="detail-value detail-link" href={contact.github} target="_blank" rel="noreferrer">
-                github.com/Harika-tech412
-              </a>
-            </div>
-            <div className="detail-row">
-              <span className="detail-label">Resume</span>
-              <a className="detail-value detail-link" href={contact.resume} download>Download PDF</a>
-            </div>
-          </div>
-        </div>
-      </section>
+function Contact() {
+  const [copied, setCopied] = useState(false);
+  const copy = async () => {
+    try {
+      await navigator.clipboard.writeText(contact.email);
+      setCopied(true);
+      setTimeout(() => setCopied(false), 1800);
+    } catch {
+      window.location.href = `mailto:${contact.email}`;
+    }
+  };
 
-      <footer className="footer">
-        <div className="footer-inner">
-          <p className="footer-name">Puchalapalli Harika</p>
-          <p className="footer-sub">AI Engineer · Mahindra University · 2027</p>
-          <div className="footer-links">
-            <a href={`mailto:${contact.email}`}>Email</a>
-            <a href={contact.linkedin} target="_blank" rel="noreferrer">LinkedIn</a>
-            <a href={contact.github} target="_blank" rel="noreferrer">GitHub</a>
+  return (
+    <section className="section" id="contact">
+      <div className="container">
+        <Reveal className="contact card">
+          <div className="contact__glow" aria-hidden="true" />
+          <div className="eyebrow">Contact</div>
+          <h2 className="h2 contact__title">Let's build something <em>intelligent</em> together.</h2>
+          <p className="lead">
+            Have a role, a project, or an idea in mind? I'd love to hear about it. Email is the
+            fastest way to reach me.
+          </p>
+          <div className="contact__email">
+            <a href={`mailto:${contact.email}`}>{contact.email}</a>
+            <button onClick={copy} className="contact__copy" aria-label="Copy email address">
+              {copied ? <><CheckIcon /> Copied</> : <><CopyIcon /> Copy</>}
+            </button>
           </div>
-          <p className="footer-copy">© {new Date().getFullYear()} Puchalapalli Harika. Built with React.</p>
-        </div>
-      </footer>
-    </div>
+          <div className="contact__actions">
+            <a className="btn btn-primary" href={`mailto:${contact.email}`}><MailIcon /> Email me</a>
+            <a className="btn btn-secondary" href={contact.linkedin} target="_blank" rel="noreferrer"><LinkedInIcon /> LinkedIn</a>
+            <a className="btn btn-secondary" href={contact.github} target="_blank" rel="noreferrer"><GitHubIcon /> GitHub</a>
+            <a className="btn btn-secondary" href={contact.resume} download><DownloadIcon /> Resume</a>
+          </div>
+        </Reveal>
+      </div>
+    </section>
+  );
+}
+
+export default function Home() {
+  return (
+    <>
+      <Hero />
+      <Experience />
+      <Projects />
+      <Skills />
+      <Background />
+      <Contact />
+    </>
   );
 }
